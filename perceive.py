@@ -2,9 +2,13 @@ import videodb
 from videodb import SceneExtractionType
 import os
 import json
+import subprocess
+import uuid
 from dotenv import load_dotenv
 
 load_dotenv()
+
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 def parse_scene_analysis(text: str) -> dict:
     try:
@@ -18,9 +22,37 @@ def parse_scene_analysis(text: str) -> dict:
             "spoken_cues": "—"
         }
 
+def download_video(url: str) -> str:
+    # unique filename so multiple videos don't overwrite each other
+    unique_name = f"video_{uuid.uuid4().hex[:8]}.mp4"
+    local_path = os.path.join(BASE, "cache", unique_name)
+    print(f"⬇️ Downloading with yt-dlp → {unique_name}")
+    subprocess.run([
+        "yt-dlp",
+        "-o", local_path,
+        "--no-playlist",
+        url
+    ], check=True)
+    size = os.path.getsize(local_path)
+    if size < 10000:
+        raise Exception(f"Downloaded file too small ({size} bytes) — download likely failed")
+    print(f"✅ Downloaded: {unique_name}")
+    return local_path
+
 def perceive_video(url: str) -> dict:
     conn = videodb.connect(api_key=os.environ.get("VIDEO_DB_API_KEY"))
-    video = conn.get_collection().upload(url=url)
+    coll = conn.get_collection()
+
+    # try URL directly first
+    try:
+        video = coll.upload(url=url)
+        print(f"✅ Uploaded via URL")
+    except Exception as e:
+        # if fails, download locally then upload
+        print(f"⚠️ URL upload failed ({e}), downloading locally...")
+        local_path = download_video(url)
+        video = coll.upload(file_path=local_path)
+        print(f"✅ Uploaded via local file")
 
     video.index_spoken_words()
 
