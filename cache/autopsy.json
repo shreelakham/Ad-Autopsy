@@ -7,13 +7,16 @@
     },
     {
       "ad_id": "m-z-019ec004-e9a5-7580-baca-26bc75f9eaff"
+    },
+    {
+      "ad_id": "m-z-019ec012-8370-76c1-84cd-591ead0d6a3b"
     }
   ],
   "patterns": [],
-  "gap": "Input data provides only ad identifiers without the specified metadata (hook, emotional arc, visual pattern, spoken/text cues with timestamps); insufficient to identify recurring patterns.",
-  "opportunity_for_nivea": "Cannot be determined without analysis of actual ad content and emotional structures.",
+  "gap": "Input data contains only ad identifiers (m-z-019ec000-6850-7a52-8481-a6bdb78b88cd, m-z-019ec004-e9a5-7580-baca-26bc75f9eaff, m-z-019ec012-8370-76c1-84cd-591ead0d6a3b) without accompanying creative elements (hooks, emotional arcs, visual patterns, spoken/text cues, timestamps). Recurring pattern identification requires substantive content analysis.",
+  "opportunity_for_nivea": "Cannot be determined without analysis of Dove's actual creative assets, emotional strategies, and messaging frameworks.",
   "counter_creative": {
-    "angle": "N/A",
-    "script": "N/A - Provide full ad metadata including hooks, emotional arcs, visual patterns, and spoken/text cues to enable strategic analysis and counter-creative development."
+    "angle": "Insufficient data to determine strategic positioning or counter-messaging.",
+    "script": "N/A"
   }
 }
