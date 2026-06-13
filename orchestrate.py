@@ -1,4 +1,5 @@
 from perceive import perceive_multiple
+from synthesize import run as run_synthesize
 import json, os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -13,7 +14,6 @@ def run_autopsy(video_urls: list):
             all_videos.append(result)
             continue
 
-        # no need to merge anymore — perceive.py already did it
         video_data = {
             "video_id": result["video_id"],
             "url": result["url"],
@@ -21,15 +21,20 @@ def run_autopsy(video_urls: list):
         }
 
         safe_name = result["video_id"]
-        with open(os.path.join(BASE, "cache", f"{safe_name}.json"), "w") as f:
+        with open(os.path.join(BASE, "cache", "output", f"{safe_name}.json"), "w") as f:
             json.dump(video_data, f, indent=2)
 
         all_videos.append(video_data)
 
-    with open(os.path.join(BASE, "cache", "final_output.json"), "w") as f:
+    with open(os.path.join(BASE, "cache", "output","final_output.json"), "w") as f:
         json.dump(all_videos, f, indent=2)
 
     print(f"\n✅ Done — {len(all_videos)} videos saved")
+
+    # run synthesize once perceive is done
+    print("\n🔍 Running synthesis...")
+    run_synthesize()
+
     return all_videos
 
 if __name__ == "__main__":

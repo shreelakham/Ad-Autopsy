@@ -23,36 +23,52 @@ def parse_scene_analysis(text: str) -> dict:
         }
 
 def download_video(url: str) -> str:
-    # unique filename so multiple videos don't overwrite each other
     unique_name = f"video_{uuid.uuid4().hex[:8]}.mp4"
-    local_path = os.path.join(BASE, "cache", unique_name)
-    print(f"⬇️ Downloading with yt-dlp → {unique_name}")
+    local_path = os.path.join(BASE, "cache", 'videos', unique_name)
+
+    print(f"⬇️ Trying curl → {unique_name}")
     subprocess.run([
-        "yt-dlp",
-        "-o", local_path,
-        "--no-playlist",
-        url
-    ], check=True)
+    "yt-dlp",
+    "-o", local_path,
+    "--no-playlist",
+    "--impersonate", "chrome",
+    url
+], check=True)
     size = os.path.getsize(local_path)
+
     if size < 10000:
-        raise Exception(f"Downloaded file too small ({size} bytes) — download likely failed")
-    print(f"✅ Downloaded: {unique_name}")
+        print(f"⬇️ curl failed, trying yt-dlp...")
+        subprocess.run([
+            "yt-dlp", "-o", local_path, "--no-playlist", url
+        ], check=True)
+        size = os.path.getsize(local_path)
+        if size < 10000:
+            raise Exception(f"Downloaded file too small ({size} bytes) — both curl and yt-dlp failed")
+
+    print(f"✅ Downloaded: {unique_name} ({size/1024:.0f}KB)")
     return local_path
 
 def perceive_video(url: str) -> dict:
     conn = videodb.connect(api_key=os.environ.get("VIDEO_DB_API_KEY"))
     coll = conn.get_collection()
 
-    # try URL directly first
-    try:
-        video = coll.upload(url=url)
-        print(f"✅ Uploaded via URL")
-    except Exception as e:
-        # if fails, download locally then upload
-        print(f"⚠️ URL upload failed ({e}), downloading locally...")
-        local_path = download_video(url)
+    # handle local file paths directly
+    is_local = url.startswith("cache/") or url.startswith("/") or (not url.startswith("http") and url.endswith(".mp4"))
+    if is_local:
+        local_path = os.path.join(BASE, url) if not url.startswith("/") else url
+        print(f"📁 Uploading from local file: {local_path}")
         video = coll.upload(file_path=local_path)
         print(f"✅ Uploaded via local file")
+    else:
+        # try URL upload first, fall back to download
+        try:
+            video = coll.upload(url=url)
+            print(f"✅ Uploaded via URL")
+        except Exception as e:
+            print(f"⚠️ URL upload failed ({e}), downloading locally...")
+            local_path = download_video(url)
+            video = coll.upload(file_path=local_path)
+            print(f"✅ Uploaded via local file")
 
     video.index_spoken_words()
 

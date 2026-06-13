@@ -1,0 +1,19 @@
+{
+  "competitor": "Dove",
+  "brand": "Nivea",
+  "per_ad": [
+    {
+      "ad_id": "m-z-019ec000-6850-7a52-8481-a6bdb78b88cd"
+    },
+    {
+      "ad_id": "m-z-019ec004-e9a5-7580-baca-26bc75f9eaff"
+    }
+  ],
+  "patterns": [],
+  "gap": "Input data provides only ad identifiers without the specified metadata (hook, emotional arc, visual pattern, spoken/text cues with timestamps); insufficient to identify recurring patterns.",
+  "opportunity_for_nivea": "Cannot be determined without analysis of actual ad content and emotional structures.",
+  "counter_creative": {
+    "angle": "N/A",
+    "script": "N/A - Provide full ad metadata including hooks, emotional arcs, visual patterns, and spoken/text cues to enable strategic analysis and counter-creative development."
+  }
+}
