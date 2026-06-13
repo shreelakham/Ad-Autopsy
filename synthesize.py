@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 from openai import OpenAI
 load_dotenv()
 
+BASE = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE, "cache", "output")
+
 client = OpenAI(
     api_key=os.environ["TOKENROUTER_API_KEY"],
     base_url=os.environ["TOKENROUTER_BASE_URL"],
@@ -10,7 +13,6 @@ client = OpenAI(
 )
 MODEL = "moonshotai/kimi-k2.5"
 
-# We are NIVEA. The competitor we analysed is DOVE.
 BRAND = "Nivea"
 COMPETITOR = "Dove"
 
@@ -23,9 +25,11 @@ Respond with ONLY valid JSON, no markdown, no preamble."""
 
 CROSS_SCHEMA = f"""Return JSON:
 {{ "patterns": [ {{ "insight": str, "ad_ids": [str] }} ],
-   "gap": str,                                  // what {COMPETITOR} never does that {BRAND} could own
-   "opportunity_for_{BRAND.lower()}": str,      // how {BRAND} should position against this
+   "gap": str,
+   "opportunity_for_{BRAND.lower()}": str,
    "counter_creative": {{ "angle": str, "script": str }} }}"""
+
+SKIP_FILES = {"final_output.json"}
 
 def ask(user_text):
     r = client.chat.completions.create(
@@ -39,37 +43,33 @@ def ask(user_text):
     return json.loads(content)
 
 def load_per_ad():
-    """Reshape each VideoDB file into a flat per-ad summary."""
     per_ad = []
-    for path in sorted(glob.glob("cache/video_*.json")):
+    files = sorted(glob.glob(os.path.join(OUTPUT_DIR, "*.json")))
+    for path in files:
+        if os.path.basename(path) in SKIP_FILES:
+            continue
         try:
             v = json.load(open(path))
         except (json.JSONDecodeError, ValueError):
             print(f"skipping bad file: {path}")
             continue
-        ad_id = v.get("video_id", path)
+        ad_id = v.get("video_id", os.path.basename(path))
         segs = v.get("unified", [])
-        # Pull the analysis VideoDB already produced, with timestamps
         per_ad.append({
-            "ad_id": ad_id,
-            "segments": [{
-                "t": int(s.get("start", 0)),
-                "hook": s.get("hook", ""),
-                "emotional_arc": s.get("emotional_arc", ""),
-                "visual_pattern": s.get("visual_pattern", ""),
-                "spoken": s.get("spoken", ""),
-                "cues": s.get("spoken_cues", "")
-            } for s in segs]
+            "ad_id": ad_id
         })
     return per_ad
 
 def run():
     per_ad = load_per_ad()
     print(f"Loaded {len(per_ad)} ads")
+    if not per_ad:
+        print("❌ No ad files found in cache/output/")
+        return
     cross = ask(f"{CROSS_SCHEMA}\n\n{COMPETITOR} ADS:\n{json.dumps(per_ad, indent=2)}")
     out = {"competitor": COMPETITOR, "brand": BRAND, "per_ad": per_ad, **cross}
-    json.dump(out, open("cache/autopsy.json", "w"), indent=2)
-    print("Wrote cache/autopsy.json")
+    json.dump(out, open(os.path.join(BASE, "cache", "autopsy.json"), "w"), indent=2)
+    print("✅ Wrote cache/autopsy.json")
 
 if __name__ == "__main__":
     run()
