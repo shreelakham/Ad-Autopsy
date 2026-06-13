@@ -68,7 +68,7 @@ def _build_payload(brand: str) -> list:
 # ----------------------------------------------------------------------------
 def scrape_brand(brand: str) -> str:
     if not API_KEY:
-        sys.exit("ERROR: BRIGHTDATA_API_KEY env var is not set.")
+        raise RuntimeError("BRIGHTDATA_API_KEY env var is not set.")
 
     os.makedirs(CACHE_DIR, exist_ok=True)
 
@@ -92,7 +92,9 @@ def scrape_brand(brand: str) -> str:
     if not trigger_resp.ok:
         print("[scraper] TRIGGER FAILED", trigger_resp.status_code, flush=True)
         print(trigger_resp.text, flush=True)      # <-- Bright Data's real reason
-        sys.exit(1)
+        raise RuntimeError(
+            f"Bright Data trigger failed ({trigger_resp.status_code}): {trigger_resp.text}"
+        )
     snapshot_id = trigger_resp.json()["snapshot_id"]
     print(f"[scraper] Triggered -> snapshot {snapshot_id}. Polling every {POLL_INTERVAL_SECS}s...", flush=True)
 
@@ -107,9 +109,9 @@ def scrape_brand(brand: str) -> str:
             print(f"[scraper] Ready after {waited}s. Downloading...", flush=True)
             break
         if status == "failed":
-            sys.exit(f"ERROR: scrape failed for '{brand}' (snapshot {snapshot_id})")
+            raise RuntimeError(f"Scrape failed for '{brand}' (snapshot {snapshot_id})")
         if waited >= POLL_TIMEOUT_SECS:
-            sys.exit(f"ERROR: scrape timed out after {POLL_TIMEOUT_SECS}s")
+            raise RuntimeError(f"Scrape timed out after {POLL_TIMEOUT_SECS}s")
 
         print(f"[scraper] status='{status}', waiting... ({waited}s)", flush=True)
         time.sleep(POLL_INTERVAL_SECS)
@@ -126,7 +128,7 @@ def scrape_brand(brand: str) -> str:
         dl.raise_for_status()
         break
     else:
-        sys.exit("ERROR: snapshot never became downloadable")
+        raise RuntimeError("Snapshot never became downloadable")
 
     with open(RAW_DATA_PATH, "w", encoding="utf-8") as f:
         json.dump(dl.json(), f, indent=2, ensure_ascii=False)
