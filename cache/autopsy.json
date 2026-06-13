@@ -1,0 +1,69 @@
+{
+  "per_ad": [
+    {
+      "ad_id": "nike_ad_001",
+      "hook": {
+        "desc": "Extreme close-up of muddy running shoes hitting wet pavement at dawn, no music, only footsteps",
+        "t": 0
+      },
+      "emotional_arc": "isolation -> struggle -> defiance -> triumph",
+      "visual_pattern": "Fast cuts every 1.2s in first 10s, slows to 3s cuts at emotional peak (t=28), product logo appears bottom-right at t=45, full-screen CTA at t=58",
+      "claims": [
+        { "text": "Built for every surface", "t": 12 },
+        { "text": "Engineered for the long run", "t": 31 },
+        { "text": "Just Do It", "t": 58 }
+      ]
+    },
+    {
+      "ad_id": "nike_ad_002",
+      "hook": {
+        "desc": "Split-screen: child kicking a ball on a dirt field / pro athlete in a stadium — mirrored motion",
+        "t": 0
+      },
+      "emotional_arc": "nostalgia -> aspiration -> unity",
+      "visual_pattern": "Split-screen held for 8s, merges at t=9, black-and-white palette until t=22 when color floods in, logo appears t=52",
+      "claims": [
+        { "text": "Every legend starts somewhere", "t": 9 },
+        { "text": "Sport belongs to everyone", "t": 38 },
+        { "text": "Just Do It", "t": 57 }
+      ]
+    },
+    {
+      "ad_id": "nike_ad_003",
+      "hook": {
+        "desc": "Black screen, single heartbeat sound, then athlete's face in extreme close-up — eyes only",
+        "t": 0
+      },
+      "emotional_arc": "tension -> focus -> release -> euphoria",
+      "visual_pattern": "Minimal cuts for first 15s (slow build), explosion of rapid 0.5s cuts t=15–30, single static hero shot at t=45, wordless CTA at t=60",
+      "claims": [
+        { "text": "Your only competition is yesterday", "t": 18 },
+        { "text": "Faster. Every time.", "t": 44 },
+        { "text": "Just Do It", "t": 60 }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "insight": "All three ads open with a sensory-first hook (sound or extreme close-up) before any branding — viewer is emotionally committed before they know it's Nike",
+      "ad_ids": ["nike_ad_001", "nike_ad_002", "nike_ad_003"]
+    },
+    {
+      "insight": "The tagline 'Just Do It' appears only in the final 5 seconds across all ads — it functions as a seal, not an opener",
+      "ad_ids": ["nike_ad_001", "nike_ad_002", "nike_ad_003"]
+    },
+    {
+      "insight": "Emotional arc always passes through a struggle or contrast phase before resolution — conflict is structural, not optional",
+      "ad_ids": ["nike_ad_001", "nike_ad_002", "nike_ad_003"]
+    },
+    {
+      "insight": "Logo placement is consistently late and small — brand confidence expressed through restraint",
+      "ad_ids": ["nike_ad_001", "nike_ad_002", "nike_ad_003"]
+    }
+  ],
+  "gap": "Nike never shows failure as permanent — every arc resolves upward. No ad sits with doubt, exhaustion, or quitting as the final emotion. The brand avoids the athlete who stops.",
+  "counter_creative": {
+    "angle": "Celebrate the athlete who stopped — and came back on their own terms, not Nike's",
+    "script": "Open on an empty pair of running shoes by a front door. Voiceover: 'I stopped for two years.' Cut to ordinary life — commute, desk, couch. No shame, no struggle music. Then: shoes laced up again, no fanfare, just a walk that becomes a jog. End frame: 'Whenever you're ready.' No 'Just Do It.' Brand logo only. — This exploits the gap by owning the pause Nike never acknowledges, making the brand feel human rather than relentless."
+  }
+}
