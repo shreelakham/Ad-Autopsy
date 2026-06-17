@@ -1,49 +1,41 @@
 {
-  "deck_title": "The Opacity Advantage: Turning Intelligence Gaps into Market Leadership",
+  "deck_title": "Competitive Blind Spot: Intelligence Before Creative",
   "slides": [
     {
-      "title": "The Insight: Intelligence Blackout",
+      "title": "The Insight: We Have IDs, Not Intelligence",
       "bullets": [
-        "Dove's creative strategy operates in strategic darkness",
-        "Ad IDs exist without accessible creative analysis",
-        "Zero visibility into hooks, arcs, or emotional triggers",
-        "Competitive blindspot prevents effective counter-positioning",
-        "Pattern recognition impossible without content assets"
+        "Dove ad IDs identified: 2 assets flagged in dataset",
+        "Zero tactical metadata: No hooks, arcs, or visual cues mapped",
+        "Analysis impossible without full creative assets and timestamps"
       ],
-      "notes": "Lead with the hard truth: our competitive analysis returned empty because Dove's actual creative assets are opaque. This isn't a failure\u2014it's the insight. Dove has engineered strategic secrecy."
+      "notes": "Opening with the hard truth from the JSON analysis: the dataset contains only ad identifiers without required metadata for competitive deconstruction."
     },
     {
-      "title": "The Risk: Flying Blind",
+      "title": "The Risk: Flying Blind Into Production",
       "bullets": [
-        "Cannot counter-position against invisible frameworks",
-        "Reactive marketing risks mimicking unseen tactics",
-        "Competitor controls narrative transparency",
-        "Nivea lacks data to optimize creative spend",
-        "Market share vulnerability without intelligence advantage"
+        "Unmapped competitive landscape risks wasted media spend",
+        "No visibility into Dove's emotional beats or messaging cadence",
+        "Danger of unintentional imitation or missed differentiation"
       ],
-      "notes": "Emphasize the danger: without knowing Dove's emotional triggers or visual patterns, any creative response is guesswork. We are spending media dollars against an invisible strategy."
+      "notes": "Highlighting the business risk of creating counter-creative without knowing what we are countering."
     },
     {
-      "title": "The Strategic Pivot",
+      "title": "The Pivot: Procurement First",
       "bullets": [
-        "Stop chasing Dove's opaque playbook immediately",
-        "Invest in proprietary first-party creative analytics",
-        "Build transparent, measurable Nivea content framework",
-        "Establish distinct territory competitors cannot replicate",
-        "Force market to respond to Nivea's visibility"
+        "Immediate procurement of full video assets required",
+        "Frame-by-frame temporal mapping of hooks and visual patterns",
+        "Only then can exploitable positioning gaps emerge"
       ],
-      "notes": "Pivot from competitive intelligence to competitive transparency. If Dove hides their creative strategy, Nivea exposes everything\u2014turning their secrecy into our strategic weapon."
+      "notes": "The necessary intermediate step before any creative work can begin."
     },
     {
-      "title": "Counter-Creative: Radical Transparency",
+      "title": "Counter-Creative Recommendation: Pause & Audit",
       "bullets": [
-        "Launch 'Proof Over Promises' campaign platform",
-        "Expose real formulation science competitors conceal",
-        "Challenge category to publish verified efficacy data",
-        "Turn their secrecy into Nivea's credibility weapon",
-        "Own measurable skincare authority versus emotional ambiguity"
+        "Suspend Nivea creative production pending competitive intelligence",
+        "Audit Dove's full creative archive with metadata extraction",
+        "Draft counter-creative only after verified gap analysis complete"
       ],
-      "notes": "The creative recommendation: don't mimic Dove's unseen emotional storytelling. Instead, attack the category's opacity. Show lab results, not just feelings. Make transparency the new premium positioning."
+      "notes": "The counter-creative recommendation is strategic patience: we cannot recommend creative angles until we analyze actual content. This prevents budget waste."
     }
   ]
 }

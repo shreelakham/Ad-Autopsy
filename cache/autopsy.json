@@ -6,17 +6,14 @@
       "ad_id": "m-z-019ec000-6850-7a52-8481-a6bdb78b88cd"
     },
     {
-      "ad_id": "m-z-019ec004-e9a5-7580-baca-26bc75f9eaff"
-    },
-    {
-      "ad_id": "m-z-019ec012-8370-76c1-84cd-591ead0d6a3b"
+      "ad_id": "m-z-019ec015-62b1-7bb0-b0cb-55870dc94687"
     }
   ],
   "patterns": [],
-  "gap": "Input data contains only ad identifiers (m-z-019ec000-6850-7a52-8481-a6bdb78b88cd, m-z-019ec004-e9a5-7580-baca-26bc75f9eaff, m-z-019ec012-8370-76c1-84cd-591ead0d6a3b) without accompanying creative elements (hooks, emotional arcs, visual patterns, spoken/text cues, timestamps). Recurring pattern identification requires substantive content analysis.",
-  "opportunity_for_nivea": "Cannot be determined without analysis of Dove's actual creative assets, emotional strategies, and messaging frameworks.",
+  "gap": "The provided dataset contains only ad identifiers (m-z-019ec000-6850-7a52-8481-a6bdb78b88cd, m-z-019ec015-62b1-7bb0-b0cb-55870dc94687) without the specified metadata including hooks, emotional arcs, visual patterns, or spoken/text cues with timestamps required for analysis.",
+  "opportunity_for_nivea": "Without the actual creative content and temporal mapping of Dove's ads, Nivea cannot identify recurring tactical patterns or exploitable positioning gaps. Complete data procurement with full creative assets is required to perform competitive analysis.",
   "counter_creative": {
-    "angle": "Insufficient data to determine strategic positioning or counter-messaging.",
-    "script": "N/A"
+    "angle": "Analysis impossible: Missing required data fields (hooks, emotional arc, visual pattern, spoken/text cues with timestamps).",
+    "script": "N/A - Cannot draft counter-creative without analysis of actual Dove ad content."
   }
 }
